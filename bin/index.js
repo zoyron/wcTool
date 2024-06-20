@@ -21,8 +21,8 @@ else if(args == '-m'){
 // handling the case where no input is given
 else if(process.argv.length == 2){
   byteCount();
-  lineCount();
   wordCount();
+  lineCount();
 }
 
 // corner case for all the invalid options
