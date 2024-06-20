@@ -12,7 +12,7 @@ if (!fileName) {
 
 if (fs.existsSync(fileName)) {
   switch (args) {
-    case '-c':
+    case '-b':
       console.log(`${byteCount()} ${fileName}`);
       break;
     case '-l':
@@ -21,7 +21,7 @@ if (fs.existsSync(fileName)) {
     case '-w':
       console.log(`${wordCount()} ${fileName}`);
       break;
-    case '-m':
+    case '-c':
       console.log(`${charCount()} ${fileName}`);
       break;
     case null:
@@ -31,8 +31,8 @@ if (fs.existsSync(fileName)) {
       console.log(`Invalid option.\nThe following options are supported
         -w\tprints the number of words in the file
         -l\tprints the number of lines in the file
-        -c\tprints the number of bytes in the file
-        -m\tprints the number of characters in the file`);
+        -b\tprints the number of bytes in the file
+        -c\tprints the number of characters in the file`);
   }
 } else {
   console.log('Enter a valid file name that exists');
