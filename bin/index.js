@@ -43,3 +43,28 @@ function byteCount(){
     console.log(e.message);
   }
 }
+
+/**
+ * This function returns the number of lines in a given text.
+ */
+function lineCount(){
+  try{
+    let data = fs.readFileSync('test.txt', 'utf-8');
+    // splitting the string into an array of subtrings based on the pattern passed as the parameter, '\n' in this case, and returning that array
+    console.log(data.split(/\r\n|\r|\n/).length); 
+  } catch(e){
+    console.log(e.message);
+  }
+}
+
+/**
+ * This function prints the number of words in the given text.
+ */
+function wordCount(){
+  try{
+    let data = fs.readFileSync('test.txt', 'utf-8');
+    console.log(data.split(/\S+/g).length);
+  } catch(e){
+    console.log(e.message);
+  }
+}
