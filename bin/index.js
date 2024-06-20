@@ -68,3 +68,15 @@ function wordCount(){
     console.log(e.message);
   }
 }
+
+/**
+ * This function prints the number of characters in a given text.
+ */
+function charCount(){
+  try{
+    let data = fs.readFileSync('test.txt', 'utf-8');
+    console.log(data.length);
+  } catch(e){
+    console.log(e.message);
+  }
+}
