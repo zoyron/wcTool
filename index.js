@@ -1,8 +1,7 @@
-#!/usr/bin/env node
-
 const fs = require('fs');
 
 let args = process.argv[2];
+let fileName = process.argv[3];
 
 if(args == '-c'){
   byteCount(); // this function returns the byte count of the file
@@ -39,7 +38,7 @@ else{
  */
 function byteCount(){
   try{
-    let buffer = fs.readFileSync('test.txt'); // open file as binary sequence
+    let buffer = fs.readFileSync(fileName); // open file as binary sequence
     console.log(buffer.length);
   } catch(e){
     console.log(e.message);
@@ -51,7 +50,7 @@ function byteCount(){
  */
 function lineCount(){
   try{
-    let data = fs.readFileSync('test.txt', 'utf-8');
+    let data = fs.readFileSync(fileName, 'utf-8');
     // splitting the string into an array of subtrings based on the pattern passed as the parameter, '\n' in this case, and returning that array
     console.log(data.split(/\r\n|\r|\n/).length); 
   } catch(e){
@@ -64,7 +63,7 @@ function lineCount(){
  */
 function wordCount(){
   try{
-    let data = fs.readFileSync('test.txt', 'utf-8');
+    let data = fs.readFileSync(fileName, 'utf-8');
     console.log(data.split(/\S+/g).length);
   } catch(e){
     console.log(e.message);
@@ -76,7 +75,7 @@ function wordCount(){
  */
 function charCount(){
   try{
-    let data = fs.readFileSync('test.txt', 'utf-8');
+    let data = fs.readFileSync(fileName, 'utf-8');
     console.log(data.length);
   } catch(e){
     console.log(e.message);
