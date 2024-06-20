@@ -2,45 +2,40 @@ const fs = require('fs');
 
 let args = process.argv[2];
 let fileName = process.argv[3];
-if(fs.existsSync(fileName)){
-  if (args == '-c') {
-    console.log(byteCount(), ' ', fileName);
-  }
 
-  else if (args == '-l') {
-    console.log(lineCount(), ' ', fileName);
-  }
-
-  else if (args == '-w') {
-    console.log(wordCount(), ' ', fileName);
-  }
-
-  else if (args == '-m') {
-    console.log(charCount(), ' ', fileName);
-  }
-
-  // handling the case where no option input is given
-  else if (process.argv.length == 3) {
-    fileName = process.argv[2];
-    if(fs.existsSync(fileName)){
-      console.log(lineCount(), ' ', wordCount(), ' ', byteCount(), ' ', fileName);
-    }
-    else
-      console.log('Enter a valid file name that exists');
-  }
-
-  else {
-    console.log('Invalid Option');
-  }
+if (!fileName) {
+  fileName = args;
+  args = null;
 }
 
-else
+if (fs.existsSync(fileName)) {
+  switch (args) {
+    case '-c':
+      console.log(`${byteCount()} ${fileName}`);
+      break;
+    case '-l':
+      console.log(`${lineCount()} ${fileName}`);
+      break;
+    case '-w':
+      console.log(`${wordCount()} ${fileName}`);
+      break;
+    case '-m':
+      console.log(`${charCount()} ${fileName}`);
+      break;
+    case null:
+      console.log(`${lineCount()} ${wordCount()} ${byteCount()} ${fileName}`);
+      break;
+    default:
+      console.log('Invalid Option');
+  }
+} else {
   console.log('Enter a valid file name that exists');
+}
 
 // function implementations
 
 /**
- * This function returns the number of bytes consisting the given file.
+ * This function returns the number of bytes in the given file.
  */
 function byteCount() {
   try {
@@ -52,7 +47,7 @@ function byteCount() {
 }
 
 /**
- * This function returns the number of lines in a given text.
+ * This function returns the number of lines in the given file.
  */
 function lineCount() {
   try {
@@ -64,19 +59,19 @@ function lineCount() {
 }
 
 /**
- * This function returns the number of words in the given text.
+ * This function returns the number of words in the given file.
  */
 function wordCount() {
   try {
     let data = fs.readFileSync(fileName, 'utf-8');
-    return data.split(/\S+/g).length;
+    return data.split(/\s+/g).filter(Boolean).length;
   } catch (e) {
     console.log(e.message);
   }
 }
 
 /**
- * This function returns the number of characters in a given text.
+ * This function returns the number of characters in the given file.
  */
 function charCount() {
   try {
