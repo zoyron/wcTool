@@ -3,44 +3,42 @@ const fs = require('fs');
 let args = process.argv[2];
 let fileName = process.argv[3];
 
-if(args == '-c'){
-  byteCount(); // this function returns the byte count of the file
+if (args == '-c') {
+  console.log(byteCount(), ' ', fileName);
 }
 
-else if(args == '-l'){
-  lineCount(); // returns the number of lines in a file
+else if (args == '-l') {
+  console.log(lineCount(), ' ', fileName);
 }
 
-else if(args == '-w'){
-  wordCount(); // returns the number of words in the input text
+else if (args == '-w') {
+  console.log(wordCount(), ' ', fileName);
 }
 
-else if(args == '-m'){
-  charCount(); // return the total number of characters in the input text
+else if (args == '-m') {
+  console.log(charCount(), ' ', fileName);
 }
 
-// handling the case where no input is given
-else if(process.argv.length == 2){
-  byteCount();
-  wordCount();
-  lineCount();
+// handling the case where no option input is given
+else if (process.argv.length == 3) {
+  fileName = process.argv[2];
+  console.log(lineCount(), ' ', wordCount(), ' ', byteCount(), ' ', fileName);
 }
 
-// corner case for all the invalid options
-else{
+else {
   console.log('Invalid Option');
 }
 
 // function implementations
 
 /**
- * This function prints the number of bytes consisting the given file.
+ * This function returns the number of bytes consisting the given file.
  */
-function byteCount(){
-  try{
+function byteCount() {
+  try {
     let buffer = fs.readFileSync(fileName); // open file as binary sequence
-    console.log(buffer.length);
-  } catch(e){
+    return buffer.length;
+  } catch (e) {
     console.log(e.message);
   }
 }
@@ -48,36 +46,35 @@ function byteCount(){
 /**
  * This function returns the number of lines in a given text.
  */
-function lineCount(){
-  try{
+function lineCount() {
+  try {
     let data = fs.readFileSync(fileName, 'utf-8');
-    // splitting the string into an array of subtrings based on the pattern passed as the parameter, '\n' in this case, and returning that array
-    console.log(data.split(/\r\n|\r|\n/).length); 
-  } catch(e){
+    return data.split(/\r\n|\r|\n/).length;
+  } catch (e) {
     console.log(e.message);
   }
 }
 
 /**
- * This function prints the number of words in the given text.
+ * This function returns the number of words in the given text.
  */
-function wordCount(){
-  try{
+function wordCount() {
+  try {
     let data = fs.readFileSync(fileName, 'utf-8');
-    console.log(data.split(/\S+/g).length);
-  } catch(e){
+    return data.split(/\S+/g).length;
+  } catch (e) {
     console.log(e.message);
   }
 }
 
 /**
- * This function prints the number of characters in a given text.
+ * This function returns the number of characters in a given text.
  */
-function charCount(){
-  try{
+function charCount() {
+  try {
     let data = fs.readFileSync(fileName, 'utf-8');
-    console.log(data.length);
-  } catch(e){
+    return data.length;
+  } catch (e) {
     console.log(e.message);
   }
 }
