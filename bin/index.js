@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 
 let args = process.argv[2];
@@ -26,7 +28,11 @@ if (fs.existsSync(fileName)) {
       console.log(`${lineCount()} ${wordCount()} ${byteCount()} ${fileName}`);
       break;
     default:
-      console.log('Invalid Option');
+      console.log(`Invalid option.\nThe following options are supported
+        -w\tprints the number of words in the file
+        -l\tprints the number of lines in the file
+        -c\tprints the number of bytes in the file
+        -m\tprints the number of characters in the file`);
   }
 } else {
   console.log('Enter a valid file name that exists');
