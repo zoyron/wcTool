@@ -2,32 +2,40 @@ const fs = require('fs');
 
 let args = process.argv[2];
 let fileName = process.argv[3];
+if(fs.existsSync(fileName)){
+  if (args == '-c') {
+    console.log(byteCount(), ' ', fileName);
+  }
 
-if (args == '-c') {
-  console.log(byteCount(), ' ', fileName);
+  else if (args == '-l') {
+    console.log(lineCount(), ' ', fileName);
+  }
+
+  else if (args == '-w') {
+    console.log(wordCount(), ' ', fileName);
+  }
+
+  else if (args == '-m') {
+    console.log(charCount(), ' ', fileName);
+  }
+
+  // handling the case where no option input is given
+  else if (process.argv.length == 3) {
+    fileName = process.argv[2];
+    if(fs.existsSync(fileName)){
+      console.log(lineCount(), ' ', wordCount(), ' ', byteCount(), ' ', fileName);
+    }
+    else
+      console.log('Enter a valid file name that exists');
+  }
+
+  else {
+    console.log('Invalid Option');
+  }
 }
 
-else if (args == '-l') {
-  console.log(lineCount(), ' ', fileName);
-}
-
-else if (args == '-w') {
-  console.log(wordCount(), ' ', fileName);
-}
-
-else if (args == '-m') {
-  console.log(charCount(), ' ', fileName);
-}
-
-// handling the case where no option input is given
-else if (process.argv.length == 3) {
-  fileName = process.argv[2];
-  console.log(lineCount(), ' ', wordCount(), ' ', byteCount(), ' ', fileName);
-}
-
-else {
-  console.log('Invalid Option');
-}
+else
+  console.log('Enter a valid file name that exists');
 
 // function implementations
 
